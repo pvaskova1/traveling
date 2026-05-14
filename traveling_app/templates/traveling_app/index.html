@@ -1,0 +1,95 @@
+{% extends 'traveling_app/layout.html' %}
+{% load static %}
+
+{% block content %}
+<!-- MODRÝ BLOK S FILTREM (Bez horní mezery) -->
+<section class="py-4" style="background-color: #003580; margin-top: 0;">
+    <div class="container">
+        <form action="/vsechny-zajezdy/" method="GET" class="bg-white rounded-1 shadow-lg d-flex flex-wrap flex-lg-nowrap align-items-stretch overflow-hidden">
+            
+            <!-- Destinace -->
+            <div class="p-3 border-end flex-grow-1 bg-white">
+                <label class="d-block small fw-bold text-muted text-uppercase" style="font-size: 0.7rem;">Kam se chystáte?</label>
+                <input type="text" name="destinace" class="form-control border-0 p-0 fw-bold shadow-none" placeholder="Itálie">
+            </div>
+            
+            <!-- Doprava -->
+            <div class="p-3 border-end flex-grow-1 bg-white">
+                <label class="d-block small fw-bold text-muted text-uppercase" style="font-size: 0.7rem;">Jak cestujete?</label>
+                <select name="doprava" class="form-select border-0 p-0 fw-bold shadow-none">
+                    <option value="">Nerozhoduje</option>
+                    <option value="Letecká">Letecky</option>
+                    <option value="Autobus">Autobus</option>
+                    <option value="Vlastní">Vlastní</option>
+                </select>
+            </div>
+
+            <!-- Datum -->
+            <div class="p-3 border-end flex-grow-1 bg-white">
+                <label class="d-block small fw-bold text-muted text-uppercase" style="font-size: 0.7rem;">Kdy pojedete?</label>
+                <div class="d-flex align-items-center gap-1">
+                    <input type="date" name="od" class="form-control border-0 p-0 fw-bold small shadow-none" value="2026-05-13">
+                    <span class="text-muted">-</span>
+                    <input type="date" name="do" class="form-control border-0 p-0 fw-bold small shadow-none" value="2026-05-20">
+                </div>
+            </div>
+
+            <!-- Počty osob -->
+            <div class="p-3 d-flex gap-3 border-end bg-white">
+                <div class="text-center">
+                    <label class="d-block text-muted fw-bold" style="font-size: 0.6rem;">DOSPĚLÍ</label>
+                    <input type="number" name="dospeli" value="1" min="1" class="form-control border-0 p-0 text-center fw-bold shadow-none" style="width: 30px;">
+                </div>
+                <div class="text-center">
+                    <label class="d-block text-muted fw-bold" style="font-size: 0.6rem;">DĚTI</label>
+                    <input type="number" name="deti" value="0" min="0" class="form-control border-0 p-0 text-center fw-bold shadow-none" style="width: 30px;">
+                </div>
+                <div class="text-center">
+                    <label class="d-block text-muted fw-bold" style="font-size: 0.6rem;">STUDENTI</label>
+                    <input type="number" name="studenti" value="0" min="0" class="form-control border-0 p-0 text-center fw-bold shadow-none" style="width: 30px;">
+                </div>
+            </div>
+
+            <!-- Tlačítko Vyhledat (Tmavo-modré) -->
+            <button type="submit" class="btn btn-dark px-5 fw-bold text-white text-uppercase" style="background-color: #00224d; border: none; border-radius: 0;">
+                Vyhledat
+            </button>
+        </form>
+    </div>
+</section>
+
+<!-- SEKCE S NABÍDKAMI -->
+<div class="container mt-5">
+    <h2 class="text-center mb-5 fw-bold text-secondary">Nejlepší nabídky CK DOBRODRUH</h2>
+    
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for z in zajezdy_top %}
+        <div class="col">
+            <div class="card h-100 border-0 shadow-sm overflow-hidden" style="border-radius: 10px;">
+                <!-- Horní barevný proužek karty -->
+                <div style="height: 8px; background-color: #003580;"></div>
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <span class="badge bg-light text-primary border border-primary small">{{ z.typ_dovolene }}</span>
+                        <span class="text-muted small"><i class="bi bi-geo-alt"></i> {{ z.destination.nazev }}</span>
+                    </div>
+                    <h5 class="card-title fw-bold mb-3">{{ z.title }}</h5>
+                    <p class="small text-muted mb-4">
+                        <i class="bi bi-calendar3"></i> {{ z.zacatek|date:"d. m." }} – {{ z.konec|date:"d. m. Y" }}<br>
+                        <i class="bi bi-airplane"></i> Doprava: {{ z.doprava }}
+                    </p>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="h4 fw-bold text-primary m-0">{{ z.cena }} Kč</span>
+                        <a href="/detail/{{ z.trip_id }}/" class="btn btn-primary fw-bold px-4">Detail</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12 text-center py-5">
+            <p class="text-muted">Aktuálně nemáme žádné zájezdy k zobrazení.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
