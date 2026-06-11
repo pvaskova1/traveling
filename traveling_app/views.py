@@ -1,14 +1,28 @@
 from django.shortcuts import render
-from .models import Zajezdy
+from .models import Zajezdy  # Ujisti se, že importuješ svůj správný model zájezdů
 
-# Přehled všech zájezdů (hlavní stránka)
-
-from .models import Zajezdy
-
+# Tvoje stávající funkce pro hlavní stranu
 def index(request):
-    # Vezmeme 6 zájezdů z tvé tabulky (viz obrázek image_2bc4de.png)
     top_nabidky = Zajezdy.objects.all().order_by('cena')[:6]
-    
-    return render(request, 'traveling_app/index.html', {
-        'zajezdy_top': top_nabidky
+    return render(request, 'traveling_app/index.html', {'zajezdy_top': top_nabidky})
+
+# --- SEM PŘIDEJ TUTO CHYBĚJÍCÍ FUNKCI ---
+def seznam_zajezdu(request):
+    # Načteme filtry z formuláře v index.html
+    destinace = request.GET.get('destinace', '')
+    doprava = request.GET.get('doprava', '')
+
+    # Základní queryset všech zájezdů
+    vysledky = Zajezdy.objects.all()
+
+    # Filtrování podle toho, co zákazník zadal
+    if destinace:
+        vysledky = vysledky.filter(destination__nazev__icontains=destinace) # Případně jen destination__icontains podle tvého modelu
+    if doprava:
+        vysledky = vysledky.filter(doprava=doprava)
+
+    return render(request, 'traveling_app/vsechny_zajezdy.html', {
+        'zajezdy_vysledek': vysledky,
+        'destinace': destinace,
+        'doprava': doprava
     })
