@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Zajezdy  # Ujisti se, že importuješ svůj správný model zájezdů
+from django.shortcuts import get_object_or_404
 
 # Tvoje stávající funkce pro hlavní stranu
 def index(request):
@@ -26,3 +27,15 @@ def seznam_zajezdu(request):
         'destinace': destinace,
         'doprava': doprava
     })
+def detail_zajezdu(request, trip_id):
+
+    zajezd = get_object_or_404(
+        Zajezdy,
+        trip_id=trip_id
+    )
+
+    return render(
+        request,
+        'traveling_app/detail_zajezdu.html',
+        {'zajezd': zajezd}
+    )

@@ -1,44 +1,57 @@
-/* Styl pro tlačítko ve vyhledávání */
-.btn-navy-action {
-    background-color: #00224d; /* Ještě tmavší modrá pro tlačítko */
-    border: none;
-    transition: background 0.3s;
-    min-width: 160px;
-    border-radius: 0;
+.hero{
+    height:90vh;
+
+    background-image:url('/static/img/hero.jpg');
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.btn-navy-action:hover {
-    background-color: #c1006a; /* Při najetí se změní na magenta (Exim barva) */
+.hero-overlay{
+
+    background:rgba(0,0,0,.4);
+
+    padding:50px;
+
+    border-radius:15px;
+
+    text-align:center;
 }
 
-/* Úprava políček ve filtru */
-.filter-box {
-    background-color: white;
+.hero-overlay h1{
+
+    color:white;
+
+    font-size:60px;
+
+    margin-bottom:20px;
 }
 
-.filter-box input, .filter-box select {
-    background-color: transparent !important;
+.hero-overlay input,
+.hero-overlay select{
+
+    padding:15px;
+
+    width:250px;
+
+    border:none;
+
+    border-radius:10px;
 }
 
-/* Odstranění šipek u čísel pro hezčí vzhled (volitelné, ale doporučené) */
-.person-input input::-webkit-outer-spin-button,
-.person-input input::-webkit-inner-spin-button {
-    margin: 0;
-}
+.hero-overlay button{
 
-.filter-box:hover {
-    background-color: #fbfbfb;
-}
-/* Odstranění mezer pro plynulý přechod barev */
-header { margin-bottom: 0 !important; }
-.search-section { margin-top: 0 !important; }
+    padding:15px 30px;
 
-/* Styl pro karty zájezdů pod nadpisem */
-.trip-card {
-    border: 1px solid #eee;
-    border-radius: 8px;
-    transition: 0.3s;
-}
-.trip-card:hover {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    background:#00a0e3;
+
+    border:none;
+
+    color:white;
+
+    border-radius:10px;
 }

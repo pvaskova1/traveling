@@ -47,6 +47,16 @@ class Zakaznici(models.Model):
     psc = models.CharField(max_length=10)
     stat = models.CharField(max_length=50)
 
+    title = models.CharField(max_length=100)
+
+    obrazek = models.ImageField(
+        upload_to='zajezdy/',
+        blank=True,
+        null=True
+    )
+
+    zacatek = models.DateField()
+
     def __str__(self):
         return f"{self.jmeno} {self.prijmeni}"
 

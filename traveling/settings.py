@@ -80,7 +80,7 @@ WSGI_APPLICATION = 'traveling.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cestovni agentura',
+        'NAME': 'cestovni_agentura',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '', #Emptyforlocalhostthroughdomainsocketsor'127.0.0.1' for  through TCP.
@@ -131,3 +131,9 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+LOGIN_URL = '/users/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
