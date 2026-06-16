@@ -1,42 +1,69 @@
 {% extends 'traveling_app/layout.html' %}
 
-{% block title %}Domů | Cestovní agentura{% endblock %}
+{% block title %}Úvod | CK Dobrodruh{% endblock %}
 
 {% block content %}
-<section class="hero">
-    <div class="hero-text">
-        <h1>Objevte svou další dovolenou</h1>
-        <p>Vyberte si ze zájezdů podle destinace, ceny, dopravy a termínu.</p>
-        <a href="{% url 'seznam_zajezdu' %}" class="btn">Zobrazit zájezdy</a>
+<section class="hero" id="uvod">
+    <div class="hero-content">
+        <h1>Objevte svět s námi!</h1>
+        <div class="underline"></div>
+        <p>
+            Vítejte u nás, cestovní agentury, kde se snažíme vaše cestování
+            udělat jednodušším a bezstarostnějším, abyste si mohli plně užívat
+            své dovolené.
+        </p>
+        <a href="#kontakt" class="hero-btn">Kontaktujte nás</a>
     </div>
 </section>
 
-<section class="section">
-    <h2>Nabídka zájezdů</h2>
+<section class="section" id="onas">
+    <h2>O nás</h2>
+    <p>
+        Jsme cestovní agentura zaměřená na pohodové dovolené, poznávací zájezdy
+        a pobyty pro rodiny i jednotlivce. Pomůžeme vám najít zájezd podle vašich
+        představ.
+    </p>
+</section>
+
+<section class="section trips-section" id="zajezdy">
+    <h2>Vybrané zájezdy</h2>
 
     <div class="cards">
         {% for zajezd in zajezdy %}
             <article class="card">
                 <h3>{{ zajezd.title }}</h3>
-
-                <p>
-                    <strong>Destinace:</strong>
-                    {{ zajezd.destination.nazev }}, {{ zajezd.destination.zeme }}
-                </p>
-
+                <p><strong>Destinace:</strong> {{ zajezd.destination.nazev }}, {{ zajezd.destination.zeme }}</p>
                 <p><strong>Typ dovolené:</strong> {{ zajezd.typ_dovolene }}</p>
                 <p><strong>Termín:</strong> {{ zajezd.zacatek }} - {{ zajezd.konec }}</p>
                 <p><strong>Doprava:</strong> {{ zajezd.doprava }}</p>
-                <p><strong>Volná místa:</strong> {{ zajezd.kapacita|add:"-"|add:zajezd.obsazeno }}</p>
 
                 <div class="card-bottom">
-                    <span class="price">{{ zajezd.cena }} Kč</span>
-                    <a href="{% url 'detail' zajezd.trip_id %}" class="btn small">Detail</a>
+                    <span>{{ zajezd.cena }} Kč</span>
+                    <a href="{% url 'detail' zajezd.trip_id %}">Detail</a>
                 </div>
             </article>
         {% empty %}
-            <p class="empty">Momentálně nejsou dostupné žádné zájezdy.</p>
+            <p>Momentálně nejsou dostupné žádné zájezdy.</p>
         {% endfor %}
     </div>
+
+    <a href="{% url 'seznam_zajezdu' %}" class="more-btn">Zobrazit všechny zájezdy</a>
+</section>
+
+<section class="section gallery" id="fotogalerie">
+    <h2>Fotogalerie</h2>
+
+    <div class="gallery-grid">
+        <div class="gallery-item one"></div>
+        <div class="gallery-item two"></div>
+        <div class="gallery-item three"></div>
+    </div>
+</section>
+
+<section class="section contact" id="kontakt">
+    <h2>Kontakt</h2>
+    <p><strong>Email:</strong> info@ckdobrodruh.cz</p>
+    <p><strong>Telefon:</strong> +420 123 456 789</p>
+    <p><strong>Adresa:</strong> Opava, Česká republika</p>
 </section>
 {% endblock %}

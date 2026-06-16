@@ -5,28 +5,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Cestovní agentura{% endblock %}</title>
+    <title>{% block title %}CK Dobrodruh{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'traveling_app/style.css' %}">
 </head>
 <body>
     <header class="header">
         <nav class="navbar">
-            <a href="{% url 'index' %}" class="logo">Cestovní agentura</a>
+            <a href="{% url 'index' %}" class="logo">
+                <span class="logo-icon">✦</span>
+                <span>CK Dobrodruh</span>
+            </a>
 
             <div class="nav-links">
-                <a href="{% url 'index' %}">Domů</a>
-                <a href="{% url 'seznam_zajezdu' %}">Všechny zájezdy</a>
+                <a href="{% url 'index' %}">Úvod</a>
+                <a href="{% url 'index' %}#onas">O nás</a>
+                <a href="{% url 'seznam_zajezdu' %}">Zájezdy</a>
+                <a href="{% url 'index' %}#fotogalerie">Fotogalerie</a>
+                <a href="{% url 'index' %}#kontakt">Kontakt</a>
             </div>
         </nav>
     </header>
 
-    <main class="container">
-        {% block content %}
-        {% endblock %}
-    </main>
-
-    <footer class="footer">
-        <p>&copy; 2026 Cestovní agentura</p>
-    </footer>
+    {% block content %}
+    {% endblock %}
 </body>
 </html>

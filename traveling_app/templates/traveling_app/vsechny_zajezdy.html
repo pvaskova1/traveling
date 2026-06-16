@@ -1,0 +1,29 @@
+{% extends 'traveling_app/layout.html' %}
+
+{% block title %}Zájezdy | CK Dobrodruh{% endblock %}
+
+{% block content %}
+<section class="section trips-section">
+    <h2>Všechny zájezdy</h2>
+
+    <div class="cards">
+        {% for zajezd in zajezdy %}
+            <article class="card">
+                <h3>{{ zajezd.title }}</h3>
+                <p><strong>Destinace:</strong> {{ zajezd.destination.nazev }}, {{ zajezd.destination.zeme }}</p>
+                <p><strong>Typ dovolené:</strong> {{ zajezd.typ_dovolene }}</p>
+                <p><strong>Termín:</strong> {{ zajezd.zacatek }} - {{ zajezd.konec }}</p>
+                <p><strong>Doprava:</strong> {{ zajezd.doprava }}</p>
+                <p><strong>Obsazeno:</strong> {{ zajezd.obsazeno }} / {{ zajezd.kapacita }}</p>
+
+                <div class="card-bottom">
+                    <span>{{ zajezd.cena }} Kč</span>
+                    <a href="{% url 'detail' zajezd.trip_id %}">Detail</a>
+                </div>
+            </article>
+        {% empty %}
+            <p>Momentálně nejsou dostupné žádné zájezdy.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

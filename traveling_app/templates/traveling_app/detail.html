@@ -1,0 +1,22 @@
+{% extends 'traveling_app/layout.html' %}
+
+{% block title %}{{ zajezd.title }} | CK Dobrodruh{% endblock %}
+
+{% block content %}
+<section class="section detail-page">
+    <h2>{{ zajezd.title }}</h2>
+
+    <div class="detail-box">
+        <p><strong>Destinace:</strong> {{ zajezd.destination.nazev }}, {{ zajezd.destination.zeme }}</p>
+        <p><strong>Typ dovolené:</strong> {{ zajezd.typ_dovolene }}</p>
+        <p><strong>Začátek:</strong> {{ zajezd.zacatek }}</p>
+        <p><strong>Konec:</strong> {{ zajezd.konec }}</p>
+        <p><strong>Doprava:</strong> {{ zajezd.doprava }}</p>
+        <p><strong>Kapacita:</strong> {{ zajezd.kapacita }}</p>
+        <p><strong>Obsazeno:</strong> {{ zajezd.obsazeno }}</p>
+        <p class="detail-price"><strong>Cena:</strong> {{ zajezd.cena }} Kč</p>
+
+        <a href="{% url 'seznam_zajezdu' %}" class="more-btn">Zpět na zájezdy</a>
+    </div>
+</section>
+{% endblock %}
