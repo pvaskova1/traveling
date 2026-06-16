@@ -1,44 +1,42 @@
-{% extends 'base.html' %}
+{% extends 'traveling_app/layout.html' %}
+
+{% block title %}Domů | Cestovní agentura{% endblock %}
 
 {% block content %}
-
 <section class="hero">
-
-    <div class="hero-overlay">
-
-        <h1>Vyberte si svou vysněnou dovolenou</h1>
-
-        <form action="{% url 'seznam_zajezdu' %}" method="get">
-
-            <input
-                type="text"
-                name="destinace"
-                placeholder="Kam chcete letět?">
-
-            <select name="doprava">
-
-                <option value="">
-                    Doprava
-                </option>
-
-                <option value="Letadlo">
-                    Letadlo
-                </option>
-
-                <option value="Autobus">
-                    Autobus
-                </option>
-
-            </select>
-
-            <button type="submit">
-                Hledat
-            </button>
-
-        </form>
-
+    <div class="hero-text">
+        <h1>Objevte svou další dovolenou</h1>
+        <p>Vyberte si ze zájezdů podle destinace, ceny, dopravy a termínu.</p>
+        <a href="{% url 'seznam_zajezdu' %}" class="btn">Zobrazit zájezdy</a>
     </div>
-
 </section>
 
+<section class="section">
+    <h2>Nabídka zájezdů</h2>
+
+    <div class="cards">
+        {% for zajezd in zajezdy %}
+            <article class="card">
+                <h3>{{ zajezd.title }}</h3>
+
+                <p>
+                    <strong>Destinace:</strong>
+                    {{ zajezd.destination.nazev }}, {{ zajezd.destination.zeme }}
+                </p>
+
+                <p><strong>Typ dovolené:</strong> {{ zajezd.typ_dovolene }}</p>
+                <p><strong>Termín:</strong> {{ zajezd.zacatek }} - {{ zajezd.konec }}</p>
+                <p><strong>Doprava:</strong> {{ zajezd.doprava }}</p>
+                <p><strong>Volná místa:</strong> {{ zajezd.kapacita|add:"-"|add:zajezd.obsazeno }}</p>
+
+                <div class="card-bottom">
+                    <span class="price">{{ zajezd.cena }} Kč</span>
+                    <a href="{% url 'detail' zajezd.trip_id %}" class="btn small">Detail</a>
+                </div>
+            </article>
+        {% empty %}
+            <p class="empty">Momentálně nejsou dostupné žádné zájezdy.</p>
+        {% endfor %}
+    </div>
+</section>
 {% endblock %}
