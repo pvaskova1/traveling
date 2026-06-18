@@ -16,14 +16,24 @@
                 <span>CK Dobrodruh</span>
             </a>
 
-            <div class="nav-links">
-                <a href="{% url 'index' %}">Úvod</a>
-                <a href="{% url 'index' %}#onas">O nás</a>
-                <a href="{% url 'seznam_zajezdu' %}">Zájezdy</a>
-                <a href="{% url 'index' %}#fotogalerie">Fotogalerie</a>
-                <a href="{% url 'index' %}#kontakt">Kontakt</a>
-            </div>
-        </nav>
+            
+        <div class="nav-links">
+    <a href="{% url 'index' %}">Úvod</a>
+    <a href="{% url 'index' %}#onas">O nás</a>
+    <a href="{% url 'seznam_zajezdu' %}">Zájezdy</a>
+    <a href="{% url 'index' %}#fotogalerie">Fotogalerie</a>
+    <a href="{% url 'index' %}#kontakt">Kontakt</a>
+
+    {% if user.is_authenticated %}
+        <span class="nav-user">{{ user.username }}</span>
+        <form method="post" action="{% url 'logout' %}" class="logout-form">
+            {% csrf_token %}
+            <button type="submit">Odhlásit</button>
+        </form>
+    {% else %}
+        <a href="{% url 'login' %}">Přihlášení</a>
+    {% endif %}
+</div>
     </header>
 
     {% block content %}

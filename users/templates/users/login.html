@@ -1,17 +1,15 @@
-{% extends "users/layout.html" %}
+{% extends 'traveling_app/layout.html' %}
 
-{% block body %}
+{% block title %}Přihlášení | CK Dobrodruh{% endblock %}
 
-    <h1>Log In</h1>
+{% block content %}
+<section class="section">
+    <h2>Přihlášení</h2>
 
-    {% if message %}
-        <div>{{ message }}</div>
-    {% endif %}
-
-    <form action="{% url 'login' %}" method="post">
+    <form method="post" class="detail-box">
         {% csrf_token %}
-        <input type="text" name="username" placeholder="Username">
-        <input type="password" name="password" placeholder="Password">
-        <input type="submit" value="Login">
+        {{ form.as_p }}
+        <button type="submit" class="more-btn">Přihlásit se</button>
     </form>
+</section>
 {% endblock %}

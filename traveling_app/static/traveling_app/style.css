@@ -218,3 +218,22 @@ body {
     border-top: 1px solid #e5e7eb;
     padding: 40px 24px;
     }
+
+.detail-box {
+    background: white;
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+    font-family: Arial, sans-serif;
+}
+
+.detail-box p {
+    margin-bottom: 12px;
+}
+
+.detail-price {
+    color: #b044c4;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
